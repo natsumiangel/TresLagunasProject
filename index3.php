@@ -156,7 +156,7 @@
                             <form  action="login.php" autocomplete="on" method="post">
                               <h1>Iniciar Sesion</h1>
                               <p> 
-                                <label for="username" class="uname" data-icon="u" > Ingresa nombre de usuario o email </label>
+                                <label for="username" class="uname" data-icon="u" > Ingresa email </label>
                                     <input id="username" name="username" required="required" type="text" placeholder="minombredeusuario o miemail@mail.com"/>
                                 </p>
                                 <p> 
