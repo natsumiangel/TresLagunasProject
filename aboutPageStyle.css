@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-/* Global Styles */
+
 
 body {
 	margin-left: auto;
@@ -9,7 +9,14 @@ body {
 	max-width: 960px;
 	padding-left: 2.275%;
 	padding-right: 2.275%;
+	
+	
 }
+
+a:hover {
+    color:#0C3;
+}
+
 
 /* Header */
 header {
@@ -413,3 +420,17 @@ footer .footerNote {
 footer{
 	margin-bottom:auto;}
 }
+#Titulos1 {font-family: 'Montserrat', sans-serif;
+	color: rgba(146,146,146,1.00);
+	font-size: 18px;
+	font-weight: 700;
+	text-transform: uppercase;} 
+#Titulos2 { font-size:18px; color:#5AD16C;} 
+#cPersonas  { border-color:#5AD16C;}
+#dia { border-color:#5AD16C;} 
+#mes { border-color:#5AD16C;}
+#anio { border-color:#5AD16C;} 
+#dia2 { border-color:#5AD16C;} 
+#mes2 { border-color:#5AD16C;}
+#anio2 { border-color:#5AD16C;} 
+#buttonReserva { border-color:#5AD16C; background-color:#5AD16C; color:#FFF;} 
