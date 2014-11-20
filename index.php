@@ -53,7 +53,7 @@ session_start();
 <div class="mainContent"> 
   <!-- Contact details -->
   <section class="section1">
-    <h2 class="sectionTitle">CONTACTO</h2>
+    <h2 class="sectionTitle">CONTACTO tres Lagunas</h2>
     <hr class="sectionTitleRule">
     <hr class="sectionTitleRule2">
     <div class="section1Content">
