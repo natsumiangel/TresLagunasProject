@@ -9,7 +9,8 @@ session_start();
 <html>
 <head>
 <script>
-function Reservar(){
+function Reservacion(){
+	
 	
 var dia =  document.getElementById("dia").value;
 
@@ -27,21 +28,45 @@ var anio1 =  document.getElementById("anio2").value;
  var dias = Math.floor(dif / (1000 * 60 * 60 * 24)) + 1; 
 	alert(dias);
 var cPersonas =  document.getElementById("cPersonas").value;	
-var cabana1=  document.getElementById("cabana1").value;	
+var cabana1=  document.getElementById("cabana1").checked;	
 var Icabana1=  document.getElementById("Icabana1").value;	
-var cabana2 =  document.getElementById("cabana2").value;
+var cabana2 =  document.getElementById("cabana2").checked;
 var Icabana2=  document.getElementById("Icabana2").value;		
-var cabana3 =  document.getElementById("cabana3").value;	
+var cabana3 =  document.getElementById("cabana3").checked;	
 var Icabana3=  document.getElementById("Icabana3").value;	
 
-alert(cPersonas);
-alert(cabana1);
-alert(cabana2);
-alert(cabana3);
-alert(Icabana1);
-alert(Icabana2);
-alert(Icabana3);
+var actividad1=  document.getElementById("actividad1").checked;	
+var actividad2=  document.getElementById("actividad2").checked;	
+var actividad3=  document.getElementById("actividad3").checked;	
+var actividad4=  document.getElementById("actividad4").checked;	
+var actividad5=  document.getElementById("actividad5").checked;	
+var actividad6=  document.getElementById("actividad6").checked;	
+
+
+if(cPersonas <=32){
+	alert("hola");
 	
+	var xmlhttpSM;
+                if (window.XMLHttpRequest){
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttpSM=new XMLHttpRequest();
+                }else{
+                    // code for IE6, IE5
+                    xmlhttpSM=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttpSM.onreadystatechange=function(){
+                    if (xmlhttpSM.readyState==4 && xmlhttpSM.status==200){
+                        document.getElementById("divCabana").innerHTML=xmlhttpSM.responseText;
+                    }
+                }
+                //send a request to a server
+                //var valor;
+                alert("mundo: "+cPersonas);
+                xmlhttpSM.open("GET","CrearReservacion.php?cPersonas="+cPersonas+"&cabana1="+cabana1+"&cabana2="+cabana2+"&cabana3="+cabana3+"&Icabana1="+Icabana1+"&Icabana2="+Icabana2+"&Icabana3="+Icabana3+"&dia="+dia+"&mes="+mes+"&anio="+anio+"&dia1="+dia1+"&mes1="+mes1+"&anio1="+anio1 +"&actividad1="+actividad1+"&actividad2="+actividad2+"&actividad3="+actividad3+"&actividad4="+actividad4+"&actividad5="+actividad5+"&actividad6="+actividad6,false);
+                xmlhttpSM.send(); 
+				alert("cruel");
+	
+	}	
 	
 	}
 function showInput(idActividad){
@@ -287,7 +312,7 @@ echo "&iexcl; No se ha encontrado ning&uacute;n registro !";
 							  
 							  ?>
                               </br>
- <p><input type="button" onClick="Reservar()" value="Reservar" id="buttonReserva"></p>                             
+ <p><input type="button" onClick="Reservacion()" value="Reservar" id="buttonReserva"></p>                             
                               </td>
     <td width="55%"><div id="divCabana" style="visibility:hidden; top:0px; text-align:center;"><p>Cabaña</p></div></td>
   </tr>
