@@ -47,7 +47,7 @@ var actividad6=  document.getElementById("actividad6").checked;
 
 
 if(cPersonas <=32){
-	alert("hola");
+	
 	
 	var xmlhttpSM;
                 if (window.XMLHttpRequest){
@@ -64,10 +64,10 @@ if(cPersonas <=32){
                 }
                 //send a request to a server
                 //var valor;
-                alert("mundo: "+cPersonas);
+               
                 xmlhttpSM.open("GET","CrearReservacion.php?cPersonas="+cPersonas+"&cabana1="+cabana1+"&cabana2="+cabana2+"&cabana3="+cabana3+"&Icabana1="+Icabana1+"&Icabana2="+Icabana2+"&Icabana3="+Icabana3+"&dia="+dia+"&mes="+mes+"&anio="+anio+"&dia1="+dia1+"&mes1="+mes1+"&anio1="+anio1 +"&actividad1="+actividad1+"&actividad2="+actividad2+"&actividad3="+actividad3+"&actividad4="+actividad4+"&actividad5="+actividad5+"&actividad6="+actividad6,false);
                 xmlhttpSM.send(); 
-				alert("cruel");
+		
 	
 	}	
 	
@@ -99,6 +99,7 @@ function showCabania(id){
                 
                 xmlhttpL.open("GET","showCabana.php?idCabana="+ id ,false);
                 xmlhttpL.send();
+				
 	
 	}
 	
