@@ -13,7 +13,7 @@ if (!($link=mysql_connect("localhost","root","")))
    } 
    
 	
-	$user = mysql_fetch_array(mysql_query("SELECT * FROM `usuario` where `nombre` LIKE '%Angel Sierra%'"));
+	$user = mysql_fetch_array(mysql_query("SELECT * FROM `usuario` where `nombre` LIKE '%". $_SESSION['sessionUser']."%'"));
 	$result  = mysql_query("SELECT * FROM  `reservacion` WHERE  `Usuario_idNombre` =". $user['idNombre'] ." ORDER BY  `reservacion`.`idReservacion` DESC ");
  ?>
  
@@ -22,6 +22,21 @@ if (!($link=mysql_connect("localhost","root","")))
 <html>
 <head>
 <script>
+
+function cerrarSesion() {
+	
+<? 
+
+$_SESSION['sessionUser'] = null; 
+
+?>	
+
+window.location="index.php";	
+	
+	} 
+
+
+
 function showDetalles( idNombre, idReservacion){
 	//alert("idR" + idReservacion);
 	var xmlhttpL;
@@ -68,7 +83,7 @@ function showDetalles( idNombre, idReservacion){
     <hr>
 <table width="100%" border="0" cellspacing="5" cellpadding="5">
   <tr>
-    <td width="30%">  <p id="Titulos2" align="center"><? echo $user['nombre'];?></p> <p><img src="images/<? echo $user['image']; ?>" width="100%" ></p>                            
+    <td width="30%">  <p id="Titulos2" align="center"><? echo $user['nombre'];?></p> <p><img src="images/<? echo $user['image']; ?>" width="100%" ></p>  <p onClick="cerrarSesion()">Cerrar Sesión</p>                          
                               </td>
     <td width="30%">
     
