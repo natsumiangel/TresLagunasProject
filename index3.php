@@ -126,7 +126,7 @@
                 
                 xmlhttpSM.open("GET","CrearCuentaUsuario.php?nombre="+nombre+"&email="+email+"&password="+password1+"&sexo="+sexo+"&tel="+telefono+"&lugar="+lugarV+"&dia="+diaV+"&mes="+mesV+"&anio="+anioV+"&idioma="+idiomaV+"&tipoUsuario="+tipoUsuarioV,false);
                 xmlhttpSM.send(); 
-				location.href = "index.php";
+				location.href = "index4.php";
 			}
 			
 		}
@@ -144,7 +144,7 @@
             <header>
 	
     <div class="profileLogo"> 
-    <p class="logoPlaceholder"><img src="001_TLLogo.jpg" height="50%"></div>
+    <p class="logoPlaceholder"><a href="index.php"><img src="001_TLLogo.jpg" height="50%"></a></div>
 </header>
             <section>				
                 <div id="container_demo" >

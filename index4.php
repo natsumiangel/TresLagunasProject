@@ -1,8 +1,11 @@
 
 <?php
 session_start();
+if($_SESSION['sessionUser'] == null ){
+	header('Location: index3.php');
+	}
+
  ?>
- 
  
  
 <!DOCTYPE HTML>
@@ -136,12 +139,12 @@ function showCabania(id){
 <header>
 <div class="profileLogo"> 
     <!-- Profile logo. Add a img tag in place of <span>. -->
-    <p class="logoPlaceholder"><img src="001_TLLogo.jpg" height="50%"></div></p>
+    <p class="logoPlaceholder"><a href="index.php"><img src="001_TLLogo.jpg" height="50%"></a></div></p>
   </div>
   
   <!-- Identity details -->
   <div class="profileHeader">
-    <h1 align="right">Tres Lagunas | Bienvenido <div style="color:#5AD16C"> <?php echo $_SESSION['sessionUser'];?> </div></h1>
+    <h1 align="right">Tres Lagunas | Bienvenido <div style="color:#5AD16C"> <a href="user.php"><?php echo $_SESSION['sessionUser'];?> </a></div></h1>
 <p id="Titulos1">Reservación</p>
     <hr>
 <table width="100%" border="0" cellspacing="1" cellpadding="1">
