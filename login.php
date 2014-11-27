@@ -35,6 +35,10 @@ if($userBD == null){
 	<?
    
 	} else { $_SESSION['sessionUser']=$userBD;
+	
+	if($resLogin['tipoUsuario']==0){
+	
+	
 	?>
 	<script>
 	
@@ -42,6 +46,19 @@ if($userBD == null){
 	
 	</script>
 	<?
+    }
+	
+	else {
+		
+		?>
+	<script>
+	
+	window.location="admin/index.php";
+	
+	</script>
+	<?
+		
+		} 
 	  }
 //echo("user(input): ".$username.", password(input): ".$password.", user(bd); ".$userBD." ");
 
