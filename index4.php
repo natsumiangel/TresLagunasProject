@@ -39,11 +39,18 @@ var cabana3 =  document.getElementById("cabana3").checked;
 var Icabana3=  document.getElementById("Icabana3").value;	
 
 var actividad1=  document.getElementById("actividad1").checked;	
+var Iactividad1=  document.getElementById("Iactividad1").value;	
 var actividad2=  document.getElementById("actividad2").checked;	
-var actividad3=  document.getElementById("actividad3").checked;	
+var Iactividad2=  document.getElementById("Iactividad2").value;	
+var actividad3=  document.getElementById("actividad3").checked;
+alert("act:" + actividad3);	
+var Iactividad3=  document.getElementById("Iactividad3").value;	
 var actividad4=  document.getElementById("actividad4").checked;	
+var Iactividad4=  document.getElementById("Iactividad4").value;	
 var actividad5=  document.getElementById("actividad5").checked;	
+var Iactividad5=  document.getElementById("Iactividad5").value;	
 var actividad6=  document.getElementById("actividad6").checked;	
+var Iactividad6=  document.getElementById("Iactividad6").value;	
 
 
 if(cPersonas <=32){
@@ -65,7 +72,7 @@ if(cPersonas <=32){
                 //send a request to a server
                 //var valor;
                
-                xmlhttpSM.open("GET","CrearReservacion.php?cPersonas="+cPersonas+"&cabana1="+cabana1+"&cabana2="+cabana2+"&cabana3="+cabana3+"&Icabana1="+Icabana1+"&Icabana2="+Icabana2+"&Icabana3="+Icabana3+"&dia="+dia+"&mes="+mes+"&anio="+anio+"&dia1="+dia1+"&mes1="+mes1+"&anio1="+anio1 +"&actividad1="+actividad1+"&actividad2="+actividad2+"&actividad3="+actividad3+"&actividad4="+actividad4+"&actividad5="+actividad5+"&actividad6="+actividad6,false);
+                xmlhttpSM.open("GET","CrearReservacion.php?cPersonas="+cPersonas+"&cabana1="+cabana1+"&cabana2="+cabana2+"&cabana3="+cabana3+"&Icabana1="+Icabana1+"&Icabana2="+Icabana2+"&Icabana3="+Icabana3+"&dia="+dia+"&mes="+mes+"&anio="+anio+"&dia1="+dia1+"&mes1="+mes1+"&anio1="+anio1 +"&actividad1="+actividad1+"&actividad2="+actividad2+"&actividad3="+actividad3+"&actividad4="+actividad4+"&actividad5="+actividad5+"&actividad6="+actividad6+"&Iactividad1="+Iactividad1+"&Iactividad2="+Iactividad2+"&Iactividad3="+Iactividad3+"&Iactividad4="+Iactividad4+"&Iactividad5="+Iactividad5+"&Iactividad6="+Iactividad6 + "&dias=" +dias,false);
                 xmlhttpSM.send(); 
 		
 	

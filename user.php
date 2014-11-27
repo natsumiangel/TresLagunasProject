@@ -83,9 +83,9 @@ function showDetalles( idNombre, idReservacion){
     <hr>
 <table width="100%" border="0" cellspacing="5" cellpadding="5">
   <tr>
-    <td width="30%">  <p id="Titulos2" align="center"><? echo $user['nombre'];?></p> <p><img src="images/<? echo $user['image']; ?>" width="100%" ></p>  <p onClick="cerrarSesion()">Cerrar Sesión</p>                          
+    <td width="25%">  <p id="Titulos2" align="center"><? echo $user['nombre'];?></p> <p><img src="images/<? echo $user['image']; ?>" width="100%" ></p>  <p onClick="cerrarSesion()">Cerrar Sesión</p>                          
                               </td>
-    <td width="30%">
+    <td width="25%">
     
     
     <p><strong>Nacionalidad: </strong><? echo $user['lugarOrigen'];?></p>
@@ -94,10 +94,10 @@ function showDetalles( idNombre, idReservacion){
       <p><strong>eMail: </strong><? echo $user['email'];?></p>
     
     
-    </td> <td width="40%"><div id="detalles"><? if ($row = mysql_fetch_array($result)){ 
+    </td> <td width="50%"><div id="detalles"><? if ($row = mysql_fetch_array($result)){ 
   
    do { 
-      echo ("<p onClick='showDetalles(". $user['idNombre'].", ".$row['idReservacion'].")'><strong>[". $row['idReservacion']."] </strong>". $row['fechaInicio']." - ". $row['fechaFinal']." <strong> ". $row['noPersonas']." Personas</strong></p>"); 
+      echo ("<p onClick='showDetalles(". $user['idNombre'].", ".$row['idReservacion'].")'><strong>[". $row['idReservacion']."] </strong>". $row['fechaInicio']." - ". $row['fechaFinal']." <strong> ". $row['noPersonas']." Personas</strong> Total: <strong>".$row['total']."</strong></p>"); 
    } while ($row = mysql_fetch_array($result)); 
    echo("</div>");
 } else { 
