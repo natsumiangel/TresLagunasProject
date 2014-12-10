@@ -1,8 +1,8 @@
 
 <?php
-session_start();
-if($_SESSION['sessionUser'] == null ){
-	header('Location: index3.php');
+
+if(!isset($_COOKIE['user'])){
+	header('Location: ../admin');
 	}
 
  ?>
@@ -156,7 +156,7 @@ if($_SESSION['sessionUser'] == null ){
 
 		<div class="tab_container">
 			<div id="tab1" class="tab_content">
-			<table class="tablesorter" cellspacing="0"> 
+			<table class="tablesorter" cellspacing="1" cellpadding="1" > 
 			<thead> 
 				<tr> 
    					
@@ -165,7 +165,7 @@ if($_SESSION['sessionUser'] == null ){
     				<th>Fecha Final</th> 
     				<th>Cant. Personas</th>
                     <th>Monto</th>  
-                    <th></th> 
+                    <th>Estado</th> 
                     <th></th> 
 				</tr> 
 			</thead> 
@@ -196,13 +196,19 @@ WHERE  `fechaInicio` >= NOW( )");
 if ($row = mysql_fetch_array($result)){ 
   
    do { 
-      echo "	<tr> 
+   
+$inicio = "". $row['fechaInicio'].""; // DD/MM/YYYY
+$partI = explode(' ', $inicio);
+$final = "". $row['fechaFinal'].""; // DD/MM/YYYY
+$partF = explode(' ', $final);
+
+      echo "	<tr >  
    					<td>[".$row['idReservacion']."]</td> 
-    				<td>".$row['fechaInicio']."</td> 
-    				<td>".$row['fechaFinal']."</td> 
+    				<td>".$partI[0]."</td> 
+    				<td>".$partF[0]."</td> 
     				<td>".$row['noPersonas']."</td>
 					<td>".$row['total']."</td>  
-    				<td><input type='image' src='images/icn_edit.png' title='Edit'><input type='image' src='images/icn_trash.png' title='Trash'></td> 
+    				<td><input type='image' src='images/".$row['estado'].".jpg' title='Edit'></td> 
 				</tr>"; 
    } while ($row = mysql_fetch_array($result)); 
  

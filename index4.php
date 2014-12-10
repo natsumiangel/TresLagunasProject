@@ -1,7 +1,7 @@
 
 <?php
-session_start();
-if($_SESSION['sessionUser'] == null ){
+//session_start();
+if(!isset($_COOKIE['user']) ){
 	header('Location: index3.php');
 	}
 
@@ -152,7 +152,7 @@ function showCabania(id){
   
   <!-- Identity details -->
   <div class="profileHeader">
-    <h1 align="right">Tres Lagunas | Bienvenido <div style="color:#5AD16C"> <a href="user.php"><?php echo $_SESSION['sessionUser'];?> </a></div></h1>
+    <h1 align="right">Tres Lagunas | Bienvenido <div style="color:#5AD16C"> <a href="user.php"><?php echo $_COOKIE['user'];?> </a></div></h1>
 <p id="Titulos1">Reservación</p>
     <hr>
 <table width="100%" border="0" cellspacing="1" cellpadding="1">

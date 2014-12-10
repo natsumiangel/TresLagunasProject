@@ -2,7 +2,7 @@
 //include("MySQL/conex.phtml");
 //$link =  conectarse();
 
-session_start();
+//session_start();
 
 if (!($link=mysql_connect("localhost","root",""))) 
    { 
@@ -18,9 +18,9 @@ if (!($link=mysql_connect("localhost","root","")))
 $username= $_POST['username'];    
 $password= $_POST['password']; 
 $resLogin = mysql_fetch_array(mysql_query("SELECT * FROM `Usuario` WHERE `email` LIKE '".$username."' AND `password` LIKE '".$password."'"));
-$userBD= $resLogin['nombre'];
-
- 
+$userBD= $resLogin['email'];
+//$_SESSION['sessionUser']=$userBD;
+setcookie("user", "".$userBD."", time() + 60 * 60 * 24);  
 if($userBD == null){
 	
 	?>
@@ -34,29 +34,17 @@ if($userBD == null){
     
 	<?
    
-	} else { $_SESSION['sessionUser']=$userBD;
+	} else { 
 	
 	if($resLogin['tipoUsuario']==0){
 	
 	
-	?>
-	<script>
-	
-	window.location="index4.php";
-	
-	</script>
-	<?
+	header('Location: user.php');
     }
 	
 	else {
 		
-		?>
-	<script>
-	
-	window.location="admin/index.php";
-	
-	</script>
-	<?
+	header('Location: admin/index.php');
 		
 		} 
 	  }

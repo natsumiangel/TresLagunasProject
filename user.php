@@ -1,6 +1,11 @@
 
 <?php
-session_start();
+//session_start();
+
+if(!isset($_COOKIE['user'])){
+	header('Location: index3.php');
+	}
+
 if (!($link=mysql_connect("localhost","root",""))) 
    { 
       echo "Error conectando a la base de datos."; 
@@ -12,9 +17,13 @@ if (!($link=mysql_connect("localhost","root","")))
       exit(); 
    } 
    
+	//echo "hola ". $_SESSION['sessionUser'];
+	$user = mysql_fetch_array(mysql_query("SELECT * FROM `usuario` where `email` LIKE '". $_COOKIE["user"]."'"));
+	//$_SESSION['sessionUser'] = $user['email'];
 	
-	$user = mysql_fetch_array(mysql_query("SELECT * FROM `usuario` where `nombre` LIKE '%". $_SESSION['sessionUser']."%'"));
+	
 	$result  = mysql_query("SELECT * FROM  `reservacion` WHERE  `Usuario_idNombre` =". $user['idNombre'] ." ORDER BY  `reservacion`.`idReservacion` DESC ");
+	
  ?>
  
  
@@ -25,17 +34,34 @@ if (!($link=mysql_connect("localhost","root","")))
 
 function cerrarSesion() {
 	
-<? 
 
-$_SESSION['sessionUser'] = null; 
-
-?>	
-
-window.location="index.php";	
+window.location="logout.php";	
 	
 	} 
 
-
+function loadbaucher(idReservacion){
+	
+	var xmlhttpLB;
+                if (window.XMLHttpRequest){
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttpLB=new XMLHttpRequest();
+                }else{
+                    // code for IE6, IE5
+                    xmlhttpLB=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttpLB.onreadystatechange=function(){
+                    if (xmlhttpLB.readyState==4 && xmlhttpLB.status==200){
+                        document.getElementById("detalles").innerHTML=xmlhttpLB.responseText;
+                    }
+                }
+                //send a request to a server
+                //var valor;
+                
+                xmlhttpLB.open("GET","baucher.php?idReservacion=" +idReservacion ,false);
+                xmlhttpLB.send();
+	
+	
+	}
 
 function showDetalles( idNombre, idReservacion){
 	//alert("idR" + idReservacion);
@@ -60,6 +86,9 @@ function showDetalles( idNombre, idReservacion){
 	
 	}
 </script>
+
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Tres Lagunas - Santuario de Cocodrilo</title>
 <link href="aboutPageStyle.css" rel="stylesheet" type="text/css">
@@ -78,7 +107,7 @@ function showDetalles( idNombre, idReservacion){
   
   <!-- Identity details -->
   <div class="profileHeader">
-    <h1 align="right">Tres Lagunas | Bienvenido <div style="color:#5AD16C"> <a href="user.php"><?php echo $_SESSION['sessionUser'];?> </a></div></h1>
+    <h1 align="right">Tres Lagunas | Bienvenido <div style="color:#5AD16C"> <a href="user.php"><?php echo $user['nombre'];?> </a></div></h1>
 <p id="Titulos1">Datos de Usuario</p>
     <hr>
 <table width="100%" border="0" cellspacing="5" cellpadding="5">
@@ -96,12 +125,22 @@ function showDetalles( idNombre, idReservacion){
     
     </td> <td width="50%"><div id="detalles"><? if ($row = mysql_fetch_array($result)){ 
   
-   do { 
-      echo ("<p onClick='showDetalles(". $user['idNombre'].", ".$row['idReservacion'].")'><strong>[". $row['idReservacion']."] </strong>". $row['fechaInicio']." - ". $row['fechaFinal']." <strong> ". $row['noPersonas']." Personas</strong> Total: <strong>".$row['total']."</strong></p>"); 
+
+ 
+
+  
+   do {      
+
+$inicio = "". $row['fechaInicio'].""; // DD/MM/YYYY
+$partI = explode(' ', $inicio);
+$final = "". $row['fechaFinal'].""; // DD/MM/YYYY
+$partF = explode(' ', $final);
+
+      echo ("<p><a onClick='showDetalles(". $user['idNombre'].", ".$row['idReservacion'].")'><strong>[". $row['idReservacion']."] </strong>". $partI[0]." <strong> to </strong>". $partF[0]."<strong> ". $row['noPersonas']." Personas</strong> Total: <strong>".$row['total']."</strong></a>  <a onClick='loadbaucher(".$row['idReservacion'].")'> <input type='image' src='images/".$row['estado'].".jpg' ></a></p> "); 
    } while ($row = mysql_fetch_array($result)); 
    echo("</div>");
 } else { 
-echo "&iexcl; No se ha encontrado ning&uacute;n registro !"; 
+echo "No hay reservaciones hasta el momento !"; 
 } ?></div></td>
   </tr>
 </table>
@@ -133,7 +172,7 @@ echo "&iexcl; No se ha encontrado ning&uacute;n registro !";
     <div class="section1Content">
       <p><span>Email:</span> info@treslagunas.com</p>
       <p><span>Website:</span> www.treslagunas.com</p>
-      <p><span>Teléfono:</span> 044 (916) 111 6421</p>
+      <p><span>Teléfono:</span> 044 (916) 111 6421 </p>
       <p><span>Dirección:</span> Lacanjá, Chiapas. </p>
     </div>
   </section>
