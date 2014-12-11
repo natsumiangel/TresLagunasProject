@@ -1,9 +1,4 @@
 
-<?php
-session_start();
-
-
- ?>
 <!doctype html>
 <html>
 <head>
@@ -28,7 +23,7 @@ session_start();
   </div>
   <!-- Identity details -->
   <div class="profileHeader">
-    <h1 align="right">Tres Lagunas | Bienvenido <div style="color:#5AD16C"><a href="user.php"><?php echo $_SESSION['sessionUser'];?> </a></div></h1>
+    <h1 align="right">Tres Lagunas | Bienvenido <div style="color:#5AD16C"><a href="user.php"> </a></div></h1>
 <h3>Santuario del cocodrilo | Centro Turístico | Municipio de Lacanjá, Chiapas.</h3>
     <hr>
     <p>Chiapas se distingue ampliamente por sus centros turísticos que junto con su riqueza de regiones naturales y gran diversidad en cultura, tradiciones y costumbres; juegan un papel muy importante para México y todo el mundo, destacando centros turísticos como es el caso de Tres Lagunas, que se localiza al Noreste de Chiapas en la Selva Lacandona con exuberante naturaleza que dignifica y pone en alto el nombre de Chiapas en cuestión a la gran derrama turística que se ofrece este maravilloso estado para todo aquél que disfruta de los viajes y conocer nuevos lugares enfocado para todo tipo de gusto de actividades, ya sea de descanso o hasta aventura.</p>
