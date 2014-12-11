@@ -2,7 +2,6 @@
 //include("MySQL/conex.phtml");
 //$link =  conectarse();
 
-session_start();
 
 if (!($link=mysql_connect("localhost","root",""))) 
    { 
@@ -63,7 +62,7 @@ $Iactividad6=$_GET['Iactividad6'];
 
 	$idUsuario =  mysql_fetch_array(mysql_query("SELECT * 
 FROM  `usuario` 
-WHERE  `nombre` LIKE  '%".$_SESSION['sessionUser']."%'"));
+WHERE  `email` LIKE  '%". $_COOKIE["user"]."%'"));
 	
 	$idReserva =  mysql_fetch_array(mysql_query("SELECT * 
 FROM  `reservacion` 
@@ -73,7 +72,7 @@ $idReservacion =  $idReserva['idReservacion'] + 1;
 
 //echo($idUsuario['idNombre'] . " - " . $idReservacion . " - " .$cabana1 );
 
-mysql_query("INSERT INTO `bd_treslagunas`.`reservacion` (`idReservacion`, `fechaInicio`, `fechaFinal`, `noPersonas`, `fotoPago`, `Usuario_idNombre`, `estado`) VALUES (null, '".$anio."-".$mes."-".$dia." 14:00:00', '".$anio1."-".$mes1."-".$dia1." 11:59:59', '".$cPersonas."','failed.jpg', '".$idUsuario['idNombre']."', '1');");
+mysql_query("INSERT INTO `bd_treslagunas`.`reservacion` (`idReservacion`, `fechaInicio`, `fechaFinal`, `noPersonas`, `fotoPago`, `Usuario_idNombre`, `estado`) VALUES (null, '".$anio."-".$mes."-".$dia." 14:00:00', '".$anio1."-".$mes1."-".$dia1." 11:59:59', '".$cPersonas."','failed.jpg', '". $idUsuario["idNombre"]."', '1');");
 
 if($cabana1 == "true"){
 

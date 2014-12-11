@@ -2,7 +2,7 @@
 <?php
 
 if(!isset($_COOKIE['user'])){
-	header('Location: ../admin');
+	header('Location: ../index3.php');
 	}
 
  ?>
@@ -19,6 +19,33 @@ if(!isset($_COOKIE['user'])){
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+    
+    <script>
+    function validate(idReservacion){
+		
+	
+		
+		var xmlhttpSM;
+                if (window.XMLHttpRequest){
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttpSM=new XMLHttpRequest();
+                }else{
+                    // code for IE6, IE5
+                    xmlhttpSM=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttpSM.onreadystatechange=function(){
+                    if (xmlhttpSM.readyState==4 && xmlhttpSM.status==200){
+                        document.getElementById("reservations").innerHTML=xmlhttpSM.responseText;
+                    }
+                }
+                //send a request to a server
+                //var valor;
+               
+                xmlhttpSM.open("GET","validate.php?idReservacion="+idReservacion,false);
+                xmlhttpSM.send(); 
+		
+		}
+    </script>
 	<script src="js/jquery-1.5.2.min.js" type="text/javascript"></script>
 	<script src="js/hideshow.js" type="text/javascript"></script>
 	<script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
@@ -64,17 +91,17 @@ if(!isset($_COOKIE['user'])){
 	<header id="header">
 		<hgroup>
 			<h1 class="site_title"><a href="index.html">Administrador</a></h1>
-			<h2 class="section_title">Tres Lagunas</h2><div class="btn_view_site"><a href="../index3.php">salir</a></div>
+			<h2 class="section_title">Tres Lagunas</h2><div class="btn_view_site"><a href="../logout.php">salir</a></div>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>Bienvenido: <?php echo $_SESSION['sessionUser'];?></p>
+			<p>Bienvenido: <?php echo $_COOKIE['user'];?></p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="../inde3.html">Login</a> <div class="breadcrumb_divider"></div> <a class="current"><?php echo $_SESSION['sessionUser'];?></a></article>
+			<article class="breadcrumbs"><a href="../inde3.html">Login</a> <div class="breadcrumb_divider"></div> <a class="current"><?php echo $_COOKIE['user'];?></a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
@@ -154,9 +181,9 @@ if(!isset($_COOKIE['user'])){
 		</ul>
 		</header>
 
-		<div class="tab_container">
+		<div class="tab_container" >
 			<div id="tab1" class="tab_content">
-			<table class="tablesorter" cellspacing="1" cellpadding="1" > 
+			<table class="tablesorter" cellspacing="1" cellpadding="1" id="reservations" > 
 			<thead> 
 				<tr> 
    					
@@ -189,9 +216,7 @@ if(!isset($_COOKIE['user'])){
       echo "Error seleccionando la base de datos."; 
       exit(); 
    } 
-                               $result = mysql_query("SELECT * 
-FROM  `reservacion` 
-WHERE  `fechaInicio` >= NOW( )"); 
+                               $result = mysql_query("SELECT * FROM `reservacion` where `fechaInicio` >= NOW( ) ORDER BY `reservacion`.`fechaInicio`  ASC"); 
 
 if ($row = mysql_fetch_array($result)){ 
   
@@ -208,7 +233,7 @@ $partF = explode(' ', $final);
     				<td>".$partF[0]."</td> 
     				<td>".$row['noPersonas']."</td>
 					<td>".$row['total']."</td>  
-    				<td><input type='image' src='images/".$row['estado'].".jpg' title='Edit'></td> 
+    				<td><a onClick='validate(".$row['idReservacion'].")'><input type='image' src='images/".$row['estado'].".jpg' title='validate'></a></td> 
 				</tr>"; 
    } while ($row = mysql_fetch_array($result)); 
  
