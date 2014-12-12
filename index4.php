@@ -12,6 +12,44 @@ if(!isset($_COOKIE['user']) ){
 <html>
 <head>
 <script>
+function vailability(){
+
+
+var dia =  document.getElementById("dia").value;
+
+var mes =  document.getElementById("mes").value;
+var anio =  document.getElementById("anio").value;
+var dia1 =  document.getElementById("dia2").value;
+
+var mes1 =  document.getElementById("mes2").value;
+var anio1 =  document.getElementById("anio2").value;
+
+
+	
+	
+	var xmlhttpSM;
+                if (window.XMLHttpRequest){
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttpSM=new XMLHttpRequest();
+                }else{
+                    // code for IE6, IE5
+                    xmlhttpSM=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttpSM.onreadystatechange=function(){
+                    if (xmlhttpSM.readyState==4 && xmlhttpSM.status==200){
+                        document.getElementById("vailabilityCabana").innerHTML=xmlhttpSM.responseText;
+                    }
+                }
+                //send a request to a server
+                //var valor;
+               
+                xmlhttpSM.open("GET","vailabilityCabana.php?dia="+dia+"&mes="+mes+"&anio="+anio+"&dia1="+dia1+"&mes1="+mes1+"&anio1="+anio1,false);
+                xmlhttpSM.send(); 
+		
+	
+	
+	}
+
 function Reservacion(){
 	
 	
@@ -29,7 +67,7 @@ var anio1 =  document.getElementById("anio2").value;
  var fFecha2 = Date.UTC(anio1,mes1,dia1); 
  var dif = fFecha2 - fFecha1;
  var dias = Math.floor(dif / (1000 * 60 * 60 * 24)) + 1; 
-	alert(dias);
+
 var cPersonas =  document.getElementById("cPersonas").value;	
 var cabana1=  document.getElementById("cabana1").checked;	
 var Icabana1=  document.getElementById("Icabana1").value;	
@@ -158,7 +196,7 @@ function showCabania(id){
 <table width="100%" border="0" cellspacing="1" cellpadding="1">
   <tr>
     <td width="45%">  <p id="Titulos2">¿Cuando?</p>
-  <p>Fecha Inicio:  <select id="dia">
+  <p>Fecha Inicio:  <select id="dia" onChange="vailability()">
                                 	<option value="1">1</option>
                                 	<option value="2">2</option>
                                 	<option value="3">3</option>
@@ -192,7 +230,7 @@ function showCabania(id){
                                 	<option value="31">31</option>
                               </select>
                               
-                              <select id="mes">
+                              <select id="mes" onChange="vailability()">
                                 	<option value="1">Enero</option>
                                 	<option value="2">Febrero</option>
                                 	<option value="3">Marzo</option>
@@ -207,11 +245,11 @@ function showCabania(id){
                                 	<option value="12">Diciembre</option>
                               </select>
                               
-                              <select id="anio">
+                              <select id="anio" onChange="vailability()">
                                 	<option value="2014">2014</option>
                                 	<option value="2015">2015</option>
                                 	
-                              </select> <p>Fecha Final: <select id="dia2">
+                              </select> <p>Fecha Final: <select id="dia2" onChange="vailability()">
                                 	<option value="1">1</option>
                                 	<option value="2">2</option>
                                 	<option value="3">3</option>
@@ -245,7 +283,7 @@ function showCabania(id){
                                 	<option value="31">31</option>
                               </select>
                               
-                              <select id="mes2">
+                              <select id="mes2" onChange="vailability()">
                                 	<option value="1">Enero</option>
                                 	<option value="2">Febrero</option>
                                 	<option value="3">Marzo</option>
@@ -260,7 +298,7 @@ function showCabania(id){
                                 	<option value="12">Diciembre</option>
                               </select>
                               
-                              <select id="anio2">
+                              <select id="anio2" onChange="vailability()">
                                 	<option value="2014">2014</option>
                                 	<option value="2015">2015</option>
                               </select></p>
@@ -268,33 +306,9 @@ function showCabania(id){
                               <p id="Titulos2">¿Cuantos?</p>
                               
                               <p>Cantidad de Personas: <input id="cPersonas"  type="text" placeholder="36(max)"/></p><p id="Titulos2">¿Qué Cabañas?</p>
-                              
-                              <?  
-							  
-							 if (!($link=mysql_connect("localhost","root",""))) 
-   { 
-      echo "Error conectando a la base de datos."; 
-      exit(); 
-   } 
-   if (!mysql_select_db("bd_treslagunas",$link)) 
-   { 
-      echo "Error seleccionando la base de datos."; 
-      exit(); 
-   } 
-                               $result = mysql_query("SELECT * FROM  `cabanias` "); 
-
-if ($row = mysql_fetch_array($result)){ 
-  
-   do { 
-      echo "<input onClick='showInputC(".$row['idCabana'].")' type='checkbox' id='cabana".$row['idCabana']."'><a  onClick='showCabania(".$row['idCabana'].")'>".$row['nombre']."<input type='text' id='Icabana".$row['idCabana']."' style='visibility:hidden' size='14' placeholder='cantidad de personas'></br></a>"; 
-   } while ($row = mysql_fetch_array($result)); 
-   echo("</div>");
-} else { 
-echo "&iexcl; No se ha encontrado ning&uacute;n registro !"; 
-} 
-							  
-							  ?>
-                              
+                              <div id="vailabilityCabana">
+<!-- here, check to by ajax if the cabana is vailability in the selected date -->
+                              </div>
                               <p id="Titulos2">¿Qué Actividades?</p>
                               
                               <?  
